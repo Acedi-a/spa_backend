@@ -41,6 +41,9 @@ namespace Aplication.Mapping
 
             // Producto mappings
             CreateMap<Producto, ProductoDTO>().ReverseMap();
+
+            CreateMap<Cita, CitaDTO>().ReverseMap();
         }
     }
 }
+

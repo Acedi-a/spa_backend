@@ -57,6 +57,10 @@ namespace Api
             builder.Services.AddScoped<IProductoRepositorio, ProductoRepositorio>();
             builder.Services.AddScoped<CrearProducto>();
 
+            // Registrar servicios para Cita
+            builder.Services.AddScoped<ICitaRepositorio, CitaRepositorio>();
+            builder.Services.AddScoped<CrearCita>();
+
             builder.Services.AddControllers();
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
@@ -92,3 +96,4 @@ namespace Api
         }
     }
 }
+
