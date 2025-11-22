@@ -13,6 +13,10 @@ namespace Dominio.Entities
         [ForeignKey(nameof(ClienteId))]
         public Cliente? Cliente { get; set; }
         
+        public int VentaId { get; set; }
+        [ForeignKey(nameof(VentaId))]
+        public Venta? Venta { get; set; }
+        
         public int ServicioId { get; set; }
         [ForeignKey(nameof(ServicioId))]
         public Servicio? Servicio { get; set; }

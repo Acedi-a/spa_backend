@@ -27,9 +27,6 @@ namespace Infraestructura.Data
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Ignore<Docente>();
-            modelBuilder.Ignore<Curso>();
-
             // Configuración de precisión para campos decimales
             modelBuilder.Entity<Empleada>()
                 .Property(e => e.PorcentajeComision)
@@ -102,6 +99,12 @@ namespace Infraestructura.Data
                 .HasOne(val => val.Cliente)
                 .WithMany(c => c.Valoraciones)
                 .HasForeignKey(val => val.ClienteId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Valoracion>()
+                .HasOne(val => val.Venta)
+                .WithMany(v => v.Valoraciones)
+                .HasForeignKey(val => val.VentaId)
                 .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<Valoracion>()

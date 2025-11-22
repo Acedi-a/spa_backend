@@ -27,5 +27,6 @@ namespace Dominio.Entities
         public string? Estado { get; set; }
         
         public ICollection<DetalleVenta>? DetalleVentas { get; set; }
+        public ICollection<Valoracion>? Valoraciones { get; set; }
     }
 }
