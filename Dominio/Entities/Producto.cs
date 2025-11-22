@@ -25,6 +25,7 @@ namespace Dominio.Entities
         public int StockMinimo { get; set; }
         
         [DataType(DataType.Date)]
+        [Column(TypeName = "timestamp without time zone")]
         public DateTime FechaVencimiento { get; set; }
         
         [MaxLength(500)]

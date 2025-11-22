@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Dominio.Entities
 {
@@ -25,6 +26,7 @@ namespace Dominio.Entities
         public decimal PorcentajeComision { get; set; }
         
         [DataType(DataType.Date)]
+        [Column(TypeName = "timestamp without time zone")]
         public DateTime FechaContratacion { get; set; }
         
         public bool Activo { get; set; } = true;

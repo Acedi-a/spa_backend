@@ -26,6 +26,8 @@ namespace Aplication.Mapping
                 .ForMember(dest => dest.docente, opt => opt.Ignore());
 
             CreateMap<Docente, DocenteDTO>().ReverseMap();
+            
+            CreateMap<Cliente, ClienteDTO>().ReverseMap();
         }
     }
 }

@@ -16,6 +16,7 @@ namespace Dominio.Entities
         public string? Nombre { get; set; }
         public string? Descripcion { get; set; }
         [DataType(DataType.Date)]
+        [Column(TypeName = "timestamp without time zone")]
         public DateTime Fecha_inicio { get; set; }
         public Guid Id_docente { get; set; }
         [ForeignKey(nameof(Id_docente))]

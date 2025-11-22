@@ -32,11 +32,15 @@ namespace Api
                     b => b.MigrationsAssembly("Infraestructura")));
 
             builder.Services.AddAutoMapper(typeof(MappingProfile).Assembly);
+            
             builder.Services.AddScoped<IDocenteRepositorio, DocenteRepositorio>();
             builder.Services.AddScoped<CrearDocente>();
 
             builder.Services.AddScoped<ICursoRepositorio, CursoRepositorio>();
             builder.Services.AddScoped<CrearCurso>();
+
+            builder.Services.AddScoped<IClienteRepositorio, ClienteRepositorio>();
+            builder.Services.AddScoped<CrearCliente>();
 
             builder.Services.AddControllers();
             builder.Services.AddEndpointsApiExplorer();

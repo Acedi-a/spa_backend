@@ -15,6 +15,7 @@ namespace Dominio.Entities
         public Cliente? Cliente { get; set; }
         
         [DataType(DataType.Date)]
+        [Column(TypeName = "timestamp without time zone")]
         public DateTime Fecha { get; set; }
         
         public decimal Total { get; set; }

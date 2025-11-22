@@ -22,6 +22,7 @@ namespace Dominio.Entities
         public Empleada? Empleada { get; set; }
         
         [DataType(DataType.Date)]
+        [Column(TypeName = "timestamp without time zone")]
         public DateTime Fecha { get; set; }
         
         public TimeSpan Hora { get; set; }
