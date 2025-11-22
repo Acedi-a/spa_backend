@@ -22,7 +22,7 @@ namespace Api
             });
 
             // -----------------------------------------------------------------
-            // 1. AGREGA TODOS TUS SERVICIOS AQUÍ
+            // 1. AGREGA TODOS TUS SERVICIOS AQU�
             // -----------------------------------------------------------------
 
 
@@ -51,6 +51,8 @@ namespace Api
             builder.Services.AddScoped<ICategoriaRepositorio, CategoriaRepositorio>();
             builder.Services.AddScoped<CrearCategoria>();
 
+            builder.Services.AddScoped<IVentaRepositorio, VentaRepositorio>();
+
             // Registrar servicios para Producto
             builder.Services.AddScoped<IProductoRepositorio, ProductoRepositorio>();
             builder.Services.AddScoped<CrearProducto>();
@@ -61,12 +63,12 @@ namespace Api
 
 
             // -----------------------------------------------------------------
-            // 2. CONSTRUYE LA APLICACIÓN (SOLO UNA VEZ)
+            // 2. CONSTRUYE LA APLICACI�N (SOLO UNA VEZ)
             // -----------------------------------------------------------------
             var app = builder.Build();
 
             // -----------------------------------------------------------------
-            // 3. CONFIGURA EL PIPELINE DE HTTP (SOLO CÓDIGO 'app.Use...')
+            // 3. CONFIGURA EL PIPELINE DE HTTP (SOLO C�DIGO 'app.Use...')
             // -----------------------------------------------------------------
 
             if (app.Environment.IsDevelopment())
@@ -84,7 +86,7 @@ namespace Api
             app.MapControllers();
 
             // -----------------------------------------------------------------
-            // 4. EJECUTA LA APLICACIÓN
+            // 4. EJECUTA LA APLICACI�N
             // -----------------------------------------------------------------
             app.Run();
         }

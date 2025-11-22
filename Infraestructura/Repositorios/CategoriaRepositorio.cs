@@ -26,7 +26,9 @@ namespace Infraestructura.Repositorios
 
         public async Task<IEnumerable<Categoria>> ListarTodosAsync()
         {
-            return await _context.Categorias.ToListAsync();
+            return await _context.Categorias
+                .Where(c => c.Activo)
+                .ToListAsync();
         }
 
         public async Task CrearAsync(Categoria categoria)
@@ -46,7 +48,7 @@ namespace Infraestructura.Repositorios
             var categoria = await ObtenerPorIdAsync(id);
             if (categoria != null)
             {
-                _context.Categorias.Remove(categoria);
+                categoria.Activo = false;
                 await _context.SaveChangesAsync();
             }
         }
