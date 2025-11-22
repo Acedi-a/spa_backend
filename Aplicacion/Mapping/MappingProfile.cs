@@ -34,6 +34,9 @@ namespace Aplication.Mapping
             CreateMap<Empleada, EmpleadaDTO>().ReverseMap();
             
             CreateMap<Categoria, CategoriaDTO>().ReverseMap();
+
+            // Producto mappings
+            CreateMap<Producto, ProductoDTO>().ReverseMap();
         }
     }
 }

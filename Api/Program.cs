@@ -1,4 +1,4 @@
-using Aplication.Mapping;
+Ôªøusing Aplication.Mapping;
 using Aplication.UseCases;
 using Dominio.Interfaces;
 using Infraestructura.Data;
@@ -22,7 +22,7 @@ namespace Api
             });
 
             // -----------------------------------------------------------------
-            // 1. AGREGA TODOS TUS SERVICIOS AQUÕ
+            // 1. AGREGA TODOS TUS SERVICIOS AQU√ç
             // -----------------------------------------------------------------
 
 
@@ -51,18 +51,22 @@ namespace Api
             builder.Services.AddScoped<ICategoriaRepositorio, CategoriaRepositorio>();
             builder.Services.AddScoped<CrearCategoria>();
 
+            // Registrar servicios para Producto
+            builder.Services.AddScoped<IProductoRepositorio, ProductoRepositorio>();
+            builder.Services.AddScoped<CrearProducto>();
+
             builder.Services.AddControllers();
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
 
             // -----------------------------------------------------------------
-            // 2. CONSTRUYE LA APLICACI”N (SOLO UNA VEZ)
+            // 2. CONSTRUYE LA APLICACI√ìN (SOLO UNA VEZ)
             // -----------------------------------------------------------------
             var app = builder.Build();
 
             // -----------------------------------------------------------------
-            // 3. CONFIGURA EL PIPELINE DE HTTP (SOLO C”DIGO 'app.Use...')
+            // 3. CONFIGURA EL PIPELINE DE HTTP (SOLO C√ìDIGO 'app.Use...')
             // -----------------------------------------------------------------
 
             if (app.Environment.IsDevelopment())
@@ -80,7 +84,7 @@ namespace Api
             app.MapControllers();
 
             // -----------------------------------------------------------------
-            // 4. EJECUTA LA APLICACI”N
+            // 4. EJECUTA LA APLICACI√ìN
             // -----------------------------------------------------------------
             app.Run();
         }
