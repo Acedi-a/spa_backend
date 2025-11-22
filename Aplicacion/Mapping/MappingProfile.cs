@@ -28,6 +28,12 @@ namespace Aplication.Mapping
             CreateMap<Docente, DocenteDTO>().ReverseMap();
             
             CreateMap<Cliente, ClienteDTO>().ReverseMap();
+            
+            CreateMap<Servicio, ServicioDTO>().ReverseMap();
+            
+            CreateMap<Empleada, EmpleadaDTO>().ReverseMap();
+            
+            CreateMap<Categoria, CategoriaDTO>().ReverseMap();
         }
     }
 }
