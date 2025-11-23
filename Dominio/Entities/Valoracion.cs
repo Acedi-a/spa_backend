@@ -20,6 +20,10 @@ namespace Dominio.Entities
         public int ServicioId { get; set; }
         [ForeignKey(nameof(ServicioId))]
         public Servicio? Servicio { get; set; }
+
+        public int EmpleadaId { get; set; }
+        [ForeignKey(nameof(EmpleadaId))]
+        public Empleada? Empleada { get; set; }
         
         [Range(1, 5)]
         public int Calificacion { get; set; }

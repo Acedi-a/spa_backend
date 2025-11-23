@@ -43,6 +43,22 @@ namespace Aplication.Mapping
             CreateMap<Producto, ProductoDTO>().ReverseMap();
 
             CreateMap<Cita, CitaDTO>().ReverseMap();
+
+            // Valoración mappings
+            // Para POST/PUT - sin propiedades calculadas
+            CreateMap<ValoracionCrearDTO, Valoracion>()
+                .ForMember(dest => dest.Id, opt => opt.Ignore())
+                .ForMember(dest => dest.Fecha, opt => opt.Ignore())
+                .ForMember(dest => dest.Cliente, opt => opt.Ignore())
+                .ForMember(dest => dest.Servicio, opt => opt.Ignore())
+                .ForMember(dest => dest.Empleada, opt => opt.Ignore())
+                .ForMember(dest => dest.Venta, opt => opt.Ignore());
+
+            // Para GET - con propiedades calculadas
+            CreateMap<Valoracion, ValoracionDTO>()
+                .ForMember(dest => dest.NombreCliente, opt => opt.MapFrom(src => src.Cliente!.Nombre))
+                .ForMember(dest => dest.NombreServicio, opt => opt.MapFrom(src => src.Servicio!.Nombre))
+                .ForMember(dest => dest.NombreEmpleada, opt => opt.MapFrom(src => src.Empleada!.Nombre));
         }
     }
 }

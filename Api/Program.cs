@@ -70,6 +70,11 @@ namespace Api
             // Registrar servicios para Disponibilidad
             builder.Services.AddScoped<IDisponibilidadRepositorio, DisponibilidadRepositorio>();
 
+            // Registrar servicios para Valoración
+            builder.Services.AddScoped<IValoracionRepositorio, ValoracionRepositorio>();
+            builder.Services.AddScoped<CrearValoracion>();
+            builder.Services.AddScoped<GenerarReporteDesempeño>();
+
             builder.Services.AddControllers();
             builder.Services.AddEndpointsApiExplorer();
             
