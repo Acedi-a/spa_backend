@@ -22,7 +22,7 @@ namespace Api
             });
 
             // -----------------------------------------------------------------
-            // 1. AGREGA TODOS TUS SERVICIOS AQU�
+            // 1. AGREGA TODOS TUS SERVICIOS AQUÍ
             // -----------------------------------------------------------------
 
 
@@ -52,14 +52,7 @@ namespace Api
             builder.Services.AddScoped<CrearCategoria>();
 
             builder.Services.AddScoped<IVentaRepositorio, VentaRepositorio>();
-
-            // Registrar servicios para Producto
-            builder.Services.AddScoped<IProductoRepositorio, ProductoRepositorio>();
-            builder.Services.AddScoped<CrearProducto>();
-
-            // Registrar servicios para Cita
-            builder.Services.AddScoped<ICitaRepositorio, CitaRepositorio>();
-            builder.Services.AddScoped<CrearCita>();
+            builder.Services.AddScoped<GenerarReportePeriodico>();
 
             builder.Services.AddControllers();
             builder.Services.AddEndpointsApiExplorer();
@@ -67,12 +60,12 @@ namespace Api
 
 
             // -----------------------------------------------------------------
-            // 2. CONSTRUYE LA APLICACI�N (SOLO UNA VEZ)
+            // 2. CONSTRUYE LA APLICACIÓN (SOLO UNA VEZ)
             // -----------------------------------------------------------------
             var app = builder.Build();
 
             // -----------------------------------------------------------------
-            // 3. CONFIGURA EL PIPELINE DE HTTP (SOLO C�DIGO 'app.Use...')
+            // 3. CONFIGURA EL PIPELINE DE HTTP (SOLO CÓDIGO 'app.Use...')
             // -----------------------------------------------------------------
 
             if (app.Environment.IsDevelopment())
@@ -90,7 +83,7 @@ namespace Api
             app.MapControllers();
 
             // -----------------------------------------------------------------
-            // 4. EJECUTA LA APLICACI�N
+            // 4. EJECUTA LA APLICACIÓN
             // -----------------------------------------------------------------
             app.Run();
         }

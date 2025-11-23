@@ -12,6 +12,7 @@ namespace Dominio.Interfaces
         Task<Venta?> ObtenerPorIdAsync(int id);
         Task<IEnumerable<Venta>> ListarTodosAsync();
         Task<IEnumerable<Venta>> ListarPorClienteAsync(Guid clienteId);
+        Task<List<Venta>> ObtenerVentasPorRangoFechaAsync(DateTime inicio, DateTime fin);
         Task CrearAsync(Venta venta);
         Task ActualizarAsync(Venta venta);
         Task EliminarAsync(int id);

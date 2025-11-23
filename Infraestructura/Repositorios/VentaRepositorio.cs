@@ -47,6 +47,19 @@ namespace Infraestructura.Repositorios
                 .ToListAsync();
         }
 
+        public async Task<List<Venta>> ObtenerVentasPorRangoFechaAsync(DateTime inicio, DateTime fin)
+        {
+            return await _context.Ventas
+                .Include(v => v.Cliente)
+                .Include(v => v.DetalleVentas)
+                    .ThenInclude(dv => dv.Producto)
+                .Include(v => v.DetalleVentas)
+                    .ThenInclude(dv => dv.Servicio)
+                .Where(v => v.Fecha >= inicio && v.Fecha <= fin)
+                .OrderByDescending(v => v.Fecha)
+                .ToListAsync();
+        }
+
         public async Task CrearAsync(Venta venta)
         {
             await _context.Ventas.AddAsync(venta);
