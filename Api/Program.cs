@@ -4,6 +4,7 @@ using Dominio.Interfaces;
 using Infraestructura.Data;
 using Infraestructura.Repositorios;
 using Microsoft.EntityFrameworkCore;
+using Scalar.AspNetCore;
 
 namespace Api
 {
@@ -51,6 +52,9 @@ namespace Api
             builder.Services.AddScoped<ICategoriaRepositorio, CategoriaRepositorio>();
             builder.Services.AddScoped<CrearCategoria>();
 
+            builder.Services.AddScoped<IProductoRepositorio, ProductoRepositorio>();
+            builder.Services.AddScoped<CrearProducto>();
+
             builder.Services.AddScoped<IVentaRepositorio, VentaRepositorio>();
             builder.Services.AddScoped<GenerarReportePeriodico>();
 
@@ -68,7 +72,17 @@ namespace Api
 
             builder.Services.AddControllers();
             builder.Services.AddEndpointsApiExplorer();
-            builder.Services.AddSwaggerGen();
+            
+            // Configuración de Swagger para Scalar
+            builder.Services.AddSwaggerGen(options =>
+            {
+                options.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo
+                {
+                    Title = "Gestion de Spa - API",
+                    Version = "v1",
+                    Description = "API para gestión de Spa - Sistema completo de ventas, servicios, clientes y reportes"
+                });
+            });
 
 
             // -----------------------------------------------------------------
@@ -82,8 +96,20 @@ namespace Api
 
             if (app.Environment.IsDevelopment())
             {
-                app.UseSwagger();
-                app.UseSwaggerUI();
+                // Habilitar Swagger
+                app.UseSwagger(options =>
+                {
+                    options.RouteTemplate = "openapi/{documentName}.json";
+                });
+                
+                // Usar Scalar en lugar de SwaggerUI
+                app.MapScalarApiReference(options =>
+                {
+                    options
+                        .WithTitle("Spa Management API")
+                        .WithTheme(ScalarTheme.Purple)
+                        .WithDefaultHttpClient(ScalarTarget.CSharp, ScalarClient.HttpClient);
+                });
             }
 
             app.UseHttpsRedirection();
