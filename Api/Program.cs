@@ -54,6 +54,18 @@ namespace Api
             builder.Services.AddScoped<IVentaRepositorio, VentaRepositorio>();
             builder.Services.AddScoped<GenerarReportePeriodico>();
 
+            // Registrar servicios para Producto
+            builder.Services.AddScoped<IProductoRepositorio, ProductoRepositorio>();
+            builder.Services.AddScoped<CrearProducto>();
+
+            // Registrar servicios para Cita
+            builder.Services.AddScoped<ICitaRepositorio, CitaRepositorio>();
+            builder.Services.AddScoped<CrearCita>();
+            builder.Services.AddScoped<ValidarDisponibilidad>();
+
+            // Registrar servicios para Disponibilidad
+            builder.Services.AddScoped<IDisponibilidadRepositorio, DisponibilidadRepositorio>();
+
             builder.Services.AddControllers();
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();

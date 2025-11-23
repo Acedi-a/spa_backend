@@ -7,12 +7,13 @@ using System.Threading.Tasks;
 
 namespace Dominio.Interfaces
 {
-  public interface ICitaRepositorio
+    public interface ICitaRepositorio
     {
-     Task<Cita?> ObtenerPorIdAsync(int id);
-     Task<IEnumerable<Cita>> ListarTodosAsync();
+        Task<Cita?> ObtenerPorIdAsync(int id);
+        Task<IEnumerable<Cita>> ListarTodosAsync();
         Task<IEnumerable<Cita>> ListarPorEmpleadaAsync(int empleadaId);
-     Task<bool> VerificarDisponibilidadAsync(int empleadaId, DateTime fecha, TimeSpan hora, int duracion);
+        Task<bool> VerificarDisponibilidadAsync(int empleadaId, DateTime fecha, TimeSpan hora, int duracion);
+        Task<IEnumerable<Cita>> ObtenerCitasDelDiaAsync(int empleadaId, DateTime fecha);
         Task CrearAsync(Cita cita);
         Task ActualizarAsync(Cita cita);
         Task EliminarAsync(int id);

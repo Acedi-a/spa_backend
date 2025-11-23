@@ -47,6 +47,17 @@ namespace Infraestructura.Repositorios
     .ToListAsync();
          }
 
+        public async Task<IEnumerable<Cita>> ObtenerCitasDelDiaAsync(int empleadaId, DateTime fecha)
+   {
+    return await _context.Citas
+   .Where(c => c.EmpleadaId == empleadaId && c.Fecha.Date == fecha.Date)
+ .Include(c => c.Cliente)
+           .Include(c => c.Servicio)
+         .Include(c => c.Empleada)
+            .OrderBy(c => c.HoraInicio)
+   .ToListAsync();
+        }
+
     public async Task<bool> VerificarDisponibilidadAsync(int empleadaId, DateTime fecha, TimeSpan hora, int duracion)
         {
           var horaFin = hora.Add(TimeSpan.FromMinutes(duracion));
