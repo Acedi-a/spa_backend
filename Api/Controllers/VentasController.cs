@@ -1,4 +1,5 @@
 using Aplication.DTOs;
+using Aplication.UseCases;
 using AutoMapper;
 using Dominio.Entities;
 using Dominio.Interfaces;
@@ -11,12 +12,40 @@ namespace Api.Controllers
     public class VentasController : ControllerBase
     {
         private readonly IVentaRepositorio _ventaRepositorio;
+        private readonly ConsultarHistorialCliente _consultarHistorialCliente;
         private readonly IMapper _mapper;
 
-        public VentasController(IVentaRepositorio ventaRepositorio, IMapper mapper)
+        public VentasController(
+            IVentaRepositorio ventaRepositorio, 
+            ConsultarHistorialCliente consultarHistorialCliente,
+            IMapper mapper)
         {
             _ventaRepositorio = ventaRepositorio;
+            _consultarHistorialCliente = consultarHistorialCliente;
             _mapper = mapper;
+        }
+
+        // GET: api/ventas/historial/{qrCode}
+        [HttpGet("historial/{qrCode}")]
+        public async Task<IActionResult> ConsultarHistorialPorQr(Guid qrCode)
+        {
+            try
+            {
+                // Paso 2: La Aplicación llama al UseCase
+                var historial = await _consultarHistorialCliente.EjecutarAsync(qrCode);
+
+                if (historial == null)
+                {
+                    return NotFound(new { error = "Cliente no encontrado con el código QR proporcionado" });
+                }
+
+                // Paso 6: Retornar historial completo
+                return Ok(historial);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { error = "Error al consultar el historial del cliente", detalle = ex.Message });
+            }
         }
 
         // GET: api/ventas

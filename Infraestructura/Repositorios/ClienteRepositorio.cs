@@ -24,6 +24,18 @@ namespace Infraestructura.Repositorios
             return await _context.Clientes.FindAsync(id);
         }
 
+        public async Task<Cliente?> ObtenerPorQrConHistorialAsync(Guid qrCode)
+        {
+            return await _context.Clientes
+                .Include(c => c.Ventas)
+                    .ThenInclude(v => v.DetalleVentas)
+                        .ThenInclude(dv => dv.Producto)
+                .Include(c => c.Ventas)
+                    .ThenInclude(v => v.DetalleVentas)
+                        .ThenInclude(dv => dv.Servicio)
+                .FirstOrDefaultAsync(c => c.Id == qrCode);
+        }
+
         public async Task<IEnumerable<Cliente>> ListarTodosAsync()
         {
             return await _context.Clientes.ToListAsync();

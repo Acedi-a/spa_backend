@@ -10,6 +10,7 @@ namespace Dominio.Interfaces
     public interface IClienteRepositorio
     {
         Task<Cliente?> ObtenerPorIdAsync(Guid id);
+        Task<Cliente?> ObtenerPorQrConHistorialAsync(Guid qrCode);
         Task<IEnumerable<Cliente>> ListarTodosAsync();
         Task CrearAsync(Cliente cliente);
         Task ActualizarAsync(Cliente cliente);

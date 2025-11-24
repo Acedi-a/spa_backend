@@ -40,6 +40,7 @@ namespace Api
 
             builder.Services.AddScoped<IClienteRepositorio, ClienteRepositorio>();
             builder.Services.AddScoped<CrearCliente>();
+            builder.Services.AddScoped<ConsultarHistorialCliente>();
 
             builder.Services.AddScoped<IServicioRepositorio, ServicioRepositorio>();
             builder.Services.AddScoped<CrearServicio>();
@@ -78,6 +79,7 @@ namespace Api
 
             builder.Services.AddControllers();
             builder.Services.AddEndpointsApiExplorer();
+
             
             // Configuración de Swagger para Scalar
             builder.Services.AddSwaggerGen(options =>

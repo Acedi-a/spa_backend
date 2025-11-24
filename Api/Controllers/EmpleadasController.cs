@@ -88,5 +88,41 @@ namespace Api.Controllers
                 return StatusCode(500, new { error = "Error interno del servidor", detalle = ex.Message });
             }
         }
+
+        // PUT: api/empleadas/{id}
+        [HttpPut("{id}")]
+        public async Task<IActionResult> ActualizarEmpleada(int id, [FromBody] EmpleadaDTO empleadaDto)
+        {
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest(ModelState);
+                }
+
+                var empleadaExistente = await _empleadaRepositorio.ObtenerPorIdAsync(id);
+
+                if (empleadaExistente == null)
+                {
+                    return NotFound(new { error = "Empleada no encontrada" });
+                }
+
+                // Actualizar campos
+                empleadaExistente.Nombre = empleadaDto.Nombre;
+                empleadaExistente.Telefono = empleadaDto.Telefono;
+                empleadaExistente.Email = empleadaDto.Email;
+                empleadaExistente.Especialidad = empleadaDto.Especialidad;
+                empleadaExistente.PorcentajeComision = empleadaDto.PorcentajeComision;
+                empleadaExistente.FechaContratacion = empleadaDto.FechaContratacion;
+
+                await _empleadaRepositorio.ActualizarAsync(empleadaExistente);
+
+                return Ok(new { mensaje = "Empleada actualizada exitosamente" });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { error = "Error al actualizar la empleada", detalle = ex.Message });
+            }
+        }
     }
 }

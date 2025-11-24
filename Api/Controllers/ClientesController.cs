@@ -88,5 +88,40 @@ namespace Api.Controllers
                 return StatusCode(500, new { error = "Error interno del servidor", detalle = ex.Message });
             }
         }
+
+        // PUT: api/clientes/{id}
+        [HttpPut("{id}")]
+        public async Task<IActionResult> ActualizarCliente(Guid id, [FromBody] ClienteDTO clienteDto)
+        {
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest(ModelState);
+                }
+
+                var clienteExistente = await _clienteRepositorio.ObtenerPorIdAsync(id);
+
+                if (clienteExistente == null)
+                {
+                    return NotFound(new { error = "Cliente no encontrado" });
+                }
+
+                // Actualizar campos
+                clienteExistente.Nombre = clienteDto.Nombre;
+                clienteExistente.Telefono = clienteDto.Telefono;
+                clienteExistente.Email = clienteDto.Email;
+                clienteExistente.FechaNacimiento = clienteDto.FechaNacimiento;
+                clienteExistente.Preferencias = clienteDto.Preferencias;
+
+                await _clienteRepositorio.ActualizarAsync(clienteExistente);
+
+                return Ok(new { mensaje = "Cliente actualizado exitosamente" });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { error = "Error al actualizar el cliente", detalle = ex.Message });
+            }
+        }
     }
 }

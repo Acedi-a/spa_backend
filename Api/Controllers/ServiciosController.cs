@@ -88,5 +88,41 @@ namespace Api.Controllers
                 return StatusCode(500, new { error = "Error interno del servidor", detalle = ex.Message });
             }
         }
+
+        // PUT: api/servicios/{id}
+        [HttpPut("{id}")]
+        public async Task<IActionResult> ActualizarServicio(int id, [FromBody] ServicioDTO servicioDto)
+        {
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest(ModelState);
+                }
+
+                var servicioExistente = await _servicioRepositorio.ObtenerPorIdAsync(id);
+
+                if (servicioExistente == null)
+                {
+                    return NotFound(new { error = "Servicio no encontrado" });
+                }
+
+                // Actualizar campos
+                servicioExistente.Nombre = servicioDto.Nombre;
+                servicioExistente.CategoriaId = servicioDto.CategoriaId;
+                servicioExistente.EmpleadaId = servicioDto.EmpleadaId;
+                servicioExistente.Precio = servicioDto.Precio;
+                servicioExistente.Duracion = servicioDto.Duracion;
+                servicioExistente.Descripcion = servicioDto.Descripcion;
+
+                await _servicioRepositorio.ActualizarAsync(servicioExistente);
+
+                return Ok(new { mensaje = "Servicio actualizado exitosamente" });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { error = "Error al actualizar el servicio", detalle = ex.Message });
+            }
+        }
     }
 }
