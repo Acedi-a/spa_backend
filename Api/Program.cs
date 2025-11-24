@@ -77,6 +77,10 @@ namespace Api
             // Registrar servicios para Backup
             builder.Services.AddScoped<IBackupRepositorio, BackupRepositorio>();
 
+            // Registrar servicios para Comision
+            builder.Services.AddScoped<IComisionRepositorio, ComisionRepositorio>();
+            builder.Services.AddScoped<CalcularComision>();
+
             builder.Services.AddControllers();
             builder.Services.AddEndpointsApiExplorer();
 
