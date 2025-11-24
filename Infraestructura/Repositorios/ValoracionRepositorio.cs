@@ -142,26 +142,28 @@ if (servicioExiste == null)
         }
         }
 
-      
-       public async Task<double> ObtenerPromedioCalificacionAsync(int empleadoId)
-      {
-       var promedio = await _context.Valoraciones
-  .Where(v => v.Servicio!.EmpleadaId == empleadoId)
-          .AverageAsync(v => (double)v.Calificacion);
 
-        return Math.Round(promedio, 2);
-       }
-
- 
-    public async Task<double> ObtenerPromedioCalificacionPorFechaAsync(int empleadoId, DateTime fechaInicio, DateTime fechaFin)
+        public async Task<double> ObtenerPromedioCalificacionAsync(int empleadoId)
         {
-       var promedio = await _context.Valoraciones
-        .Where(v => v.Servicio!.EmpleadaId == empleadoId
-      && v.Fecha.Date >= fechaInicio.Date
-  && v.Fecha.Date <= fechaFin.Date)
-   .AverageAsync(v => (double)v.Calificacion);
+            var promedio = await _context.Valoraciones
+                .Where(v => v.Servicio!.EmpleadaId == empleadoId)
+                .AverageAsync(v => (double?)v.Calificacion);
 
-              return Math.Round(promedio, 2);
+            return promedio.HasValue ? Math.Round(promedio.Value, 2) : 0;
         }
+
+
+
+        public async Task<double> ObtenerPromedioCalificacionPorFechaAsync(int empleadoId, DateTime fechaInicio, DateTime fechaFin)
+        {
+            var promedio = await _context.Valoraciones
+                .Where(v => v.Servicio!.EmpleadaId == empleadoId
+                    && v.Fecha.Date >= fechaInicio.Date
+                    && v.Fecha.Date <= fechaFin.Date)
+                .AverageAsync(v => (double?)v.Calificacion);
+
+            return promedio.HasValue ? Math.Round(promedio.Value, 2) : 0;
+        }
+
     }
 }

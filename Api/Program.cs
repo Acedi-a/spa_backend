@@ -82,12 +82,9 @@ namespace Api
             builder.Services.AddScoped<IComisionRepositorio, ComisionRepositorio>();
             builder.Services.AddScoped<CalcularComision>();
 
-<<<<<<< Updated upstream
             builder.Services.AddScoped<IVentaRepositorio, VentaRepositorio>();
-=======
             // Registrar servicio para Email
             builder.Services.AddScoped<IEmailService, EmailService>();
->>>>>>> Stashed changes
 
             builder.Services.AddControllers();
             builder.Services.AddEndpointsApiExplorer();
