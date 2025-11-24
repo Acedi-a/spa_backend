@@ -19,9 +19,7 @@ namespace Infraestructura.Repositorios
       _context = context;
         }
 
-        /// <summary>
-        /// Obtiene una valoración por su ID
-        /// </summary>
+      
         public async Task<Valoracion?> ObtenerPorIdAsync(int id)
        {
             return await _context.Valoraciones
@@ -31,9 +29,7 @@ namespace Infraestructura.Repositorios
     .FirstOrDefaultAsync(v => v.Id == id);
         }
 
-   /// <summary>
-        /// Lista todas las valoraciones
-        /// </summary>
+   
    public async Task<IEnumerable<Valoracion>> ListarTodosAsync()
     {
       return await _context.Valoraciones
@@ -44,9 +40,7 @@ namespace Infraestructura.Repositorios
     .ToListAsync();
       }
 
-        /// <summary>
-        /// Obtiene todas las valoraciones de un empleado específico
-        /// </summary>
+       
        public async Task<IEnumerable<Valoracion>> ObtenerPorEmpleadoAsync(int empleadoId)
  {
   // Las valoraciones se vinculan al empleado a través del Servicio
@@ -59,9 +53,7 @@ namespace Infraestructura.Repositorios
             .ToListAsync();
         }
 
-  /// <summary>
-   /// Obtiene todas las valoraciones de un cliente
-/// </summary>
+ 
         public async Task<IEnumerable<Valoracion>> ObtenerPorClienteAsync(Guid clienteId)
        {
         return await _context.Valoraciones
@@ -73,9 +65,7 @@ namespace Infraestructura.Repositorios
      .ToListAsync();
   }
 
-  /// <summary>
-   /// Obtiene valoraciones de un empleado en un rango de fechas
-        /// </summary>
+  
         public async Task<IEnumerable<Valoracion>> ObtenerPorEmpleadoYFechaAsync(int empleadoId, DateTime fechaInicio, DateTime fechaFin)
    {
            return await _context.Valoraciones
@@ -89,9 +79,7 @@ namespace Infraestructura.Repositorios
        .ToListAsync();
       }
 
-   /// <summary>
-        /// Crea una nueva valoración
-   /// </summary>
+   
    public async Task CrearAsync(Valoracion valoracion)
     {
     // Validar que el servicio existe
@@ -122,9 +110,7 @@ if (servicioExiste == null)
       await _context.SaveChangesAsync();
         }
 
-       /// <summary>
-   /// Actualiza una valoración existente
-        /// </summary>
+       
      public async Task ActualizarAsync(Valoracion valoracion)
   {
   // Validar que el servicio existe
@@ -145,9 +131,7 @@ if (servicioExiste == null)
       await _context.SaveChangesAsync();
         }
 
-    /// <summary>
-    /// Elimina una valoración
-        /// </summary>
+    
         public async Task EliminarAsync(int id)
         {
  var valoracion = await ObtenerPorIdAsync(id);
@@ -158,9 +142,7 @@ if (servicioExiste == null)
         }
         }
 
-      /// <summary>
-       /// Obtiene el promedio de calificación de un empleado
-    /// </summary>
+      
        public async Task<double> ObtenerPromedioCalificacionAsync(int empleadoId)
       {
        var promedio = await _context.Valoraciones
@@ -170,9 +152,7 @@ if (servicioExiste == null)
         return Math.Round(promedio, 2);
        }
 
- /// <summary>
-        /// Obtiene el promedio de calificación de un empleado en un rango de fechas
-         /// </summary>
+ 
     public async Task<double> ObtenerPromedioCalificacionPorFechaAsync(int empleadoId, DateTime fechaInicio, DateTime fechaFin)
         {
        var promedio = await _context.Valoraciones

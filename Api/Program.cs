@@ -22,9 +22,7 @@ namespace Api
                 });
             });
 
-            // -----------------------------------------------------------------
-            // 1. AGREGA TODOS TUS SERVICIOS AQUÍ
-            // -----------------------------------------------------------------
+         
 
 
 
@@ -75,6 +73,9 @@ namespace Api
             builder.Services.AddScoped<CrearValoracion>();
             builder.Services.AddScoped<GenerarReporteDesempeño>();
 
+            // Registrar servicios para Backup
+            builder.Services.AddScoped<IBackupRepositorio, BackupRepositorio>();
+
             builder.Services.AddControllers();
             builder.Services.AddEndpointsApiExplorer();
             
@@ -90,14 +91,11 @@ namespace Api
             });
 
 
-            // -----------------------------------------------------------------
-            // 2. CONSTRUYE LA APLICACIÓN (SOLO UNA VEZ)
-            // -----------------------------------------------------------------
+           
             var app = builder.Build();
 
-            // -----------------------------------------------------------------
-            // 3. CONFIGURA EL PIPELINE DE HTTP (SOLO CÓDIGO 'app.Use...')
-            // -----------------------------------------------------------------
+           
+           
 
             if (app.Environment.IsDevelopment())
             {
@@ -125,9 +123,7 @@ namespace Api
 
             app.MapControllers();
 
-            // -----------------------------------------------------------------
-            // 4. EJECUTA LA APLICACIÓN
-            // -----------------------------------------------------------------
+          
             app.Run();
         }
     }

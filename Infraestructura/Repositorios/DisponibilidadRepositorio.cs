@@ -19,9 +19,7 @@ namespace Infraestructura.Repositorios
       _context = context;
         }
 
-        /// <summary>
-        /// Verifica si existe disponibilidad en un horario específico
-        /// </summary>
+        
         public async Task<bool> VerificarDisponibilidadAsync(int empleadaId, DateTime fecha, TimeSpan hora, int duracion)
         {
       var horaFin = hora.Add(TimeSpan.FromMinutes(duracion));
@@ -36,9 +34,7 @@ namespace Infraestructura.Repositorios
             return !conflicto; // Retorna true si está disponible (no hay conflicto)
       }
 
-     /// <summary>
-      /// Obtiene todas las citas de una empleada en una fecha específica, ordenadas por hora
-        /// </summary>
+    
         public async Task<IEnumerable<Cita>> ObtenerCitasDelDiaAsync(int empleadaId, DateTime fecha)
         {
        return await _context.Citas
@@ -50,9 +46,7 @@ namespace Infraestructura.Repositorios
 .ToListAsync();
     }
 
-        /// <summary>
-        /// Detecta si existe conflicto de horario entre una hora solicitada y las citas existentes
-        /// </summary>
+       
         public async Task<bool> ExisteConflictoHorarioAsync(int empleadaId, DateTime fecha, TimeSpan horaInicio, TimeSpan horaFin)
         {
             var conflicto = await _context.Citas
