@@ -15,6 +15,7 @@ namespace Api.Controllers
         private readonly ConsultarHistorialCliente _consultarHistorialCliente;
         private readonly IMapper _mapper;
 
+        public VentasController(IVentaRepositorio ventaRepositorio, IMapper mapper)
         public VentasController(
             IVentaRepositorio ventaRepositorio, 
             ConsultarHistorialCliente consultarHistorialCliente,

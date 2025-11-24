@@ -79,7 +79,7 @@ namespace Aplication.UseCases
                 } : null;
             }
 
-            // Detalles de ventas
+            // Detalles de ventas CON sus detalles de items
             reporte.Detalles = ventas.Select(v => new VentaReporteDto
             {
                 Id = v.Id,
@@ -89,7 +89,21 @@ namespace Aplication.UseCases
                 Total = v.Total,
                 MetodoPago = v.MetodoPago,
                 Estado = v.Estado,
-                CantidadItems = v.DetalleVentas?.Count ?? 0
+                CantidadItems = v.DetalleVentas?.Count ?? 0,
+                
+                // Mapear los detalles de la venta
+                Detalles = v.DetalleVentas?.Select(dv => new DetalleVentaReporteDto
+                {
+                    Id = dv.Id,
+                    TipoItem = dv.ProductoId.HasValue ? "Producto" : "Servicio",
+                    ProductoId = dv.ProductoId,
+                    NombreProducto = dv.Producto?.Nombre,
+                    ServicioId = dv.ServicioId,
+                    NombreServicio = dv.Servicio?.Nombre,
+                    Cantidad = dv.Cantidad,
+                    PrecioUnitario = dv.PrecioUnitario,
+                    Subtotal = dv.Subtotal
+                }).ToList() ?? new List<DetalleVentaReporteDto>()
             }).OrderByDescending(v => v.Fecha).ToList();
 
             // Estadísticas por método de pago

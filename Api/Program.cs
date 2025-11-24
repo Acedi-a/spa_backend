@@ -81,18 +81,20 @@ namespace Api
             builder.Services.AddScoped<IComisionRepositorio, ComisionRepositorio>();
             builder.Services.AddScoped<CalcularComision>();
 
+            builder.Services.AddScoped<IVentaRepositorio, VentaRepositorio>();
+
             builder.Services.AddControllers();
             builder.Services.AddEndpointsApiExplorer();
 
             
-            // Configuración de Swagger para Scalar
+            // Configuraci�n de Swagger para Scalar
             builder.Services.AddSwaggerGen(options =>
             {
                 options.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo
                 {
                     Title = "Gestion de Spa - API",
                     Version = "v1",
-                    Description = "API para gestión de Spa - Sistema completo de ventas, servicios, clientes y reportes"
+                    Description = "API para gesti�n de Spa - Sistema completo de ventas, servicios, clientes y reportes"
                 });
             });
 
